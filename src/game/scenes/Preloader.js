@@ -33,6 +33,8 @@ export class Preloader extends Scene
         this.load.setPath('assets');
 
         this.load.image('logo', 'SEAGULL METRO LOGO.png');
+        this.load.image('dark logo', 'SEAGULL METRO LOGO DARK.png');
+        
     }
 
     create ()

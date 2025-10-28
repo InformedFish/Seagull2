@@ -20,10 +20,10 @@ export class MainMenu extends Scene
             align: 'center'
         });
 
-        this.input.once('pointerdown', () => {
+        playText.setInteractive();
+        // playText.on('pointerdown', ()=> {console.log("ow")});
+        playText.on('pointerdown', ()=> {this.scene.start('Cutscene');}) //I'm never able to understand arrow functions grrr
 
-            this.scene.start('Game');
-
-        });
+        // i will not be implementing cool button stuff
     }
 }

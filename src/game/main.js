@@ -4,6 +4,7 @@ import { GameOver } from './scenes/GameOver';
 import { MainMenu } from './scenes/MainMenu';
 import { Preloader } from './scenes/Preloader';
 import { AUTO, Game } from 'phaser';
+import { Cutscene } from './scenes/Cutscene';
 
 //  Find out more information about the Game Config at:
 //  https://docs.phaser.io/api-documentation/typedef/types-core#gameconfig
@@ -22,7 +23,8 @@ const config = {
         Preloader,
         MainMenu,
         MainGame,
-        GameOver
+        GameOver,
+        Cutscene
     ]
 };
 
