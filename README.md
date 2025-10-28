@@ -32,7 +32,11 @@ Reaching goals:
 - Implement feedback
 
 Current Bugs:
-- Opening cutscene does not work when spamming through the messages.
+- Opening cutscene does not work when spamming through the messages. I think I can fix this by having the handleClick interact with the displayText, but this is pretty low priority for me. Don't go clicking.
+- Loading scene GIF does not work because Phaser does not support GIFs. I don't think websites in general support GIFs, actually. Need to convert to spritesheet, but low priority.
+
+
+- Cutscene needs two clicks in order to end properly. FIXED.
     
 
 

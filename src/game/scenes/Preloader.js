@@ -29,12 +29,16 @@ export class Preloader extends Scene
 
     preload ()
     {
-        //  Load the assets for the game - Replace with your own assets
         this.load.setPath('assets');
+
+        this.load.image('background', 'background.jpeg');
 
         this.load.image('logo', 'SEAGULL METRO LOGO.png');
         this.load.image('dark logo', 'SEAGULL METRO LOGO DARK.png');
-        
+        this.load.image('busy train', 'BUSY TRAIN.png');
+
+        this.load.image('traffic', 'traffic.png');
+
     }
 
     create ()

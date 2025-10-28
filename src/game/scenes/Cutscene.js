@@ -16,7 +16,7 @@ export class Cutscene extends Scene
                 text: 'The city of Seagull has been built on car infrastructure. There is no practical way of getting around without a car.'
             },
             {
-                image: 'slide2',
+                image: 'traffic',
                 text: 'Unprecedent population growth has led to highways being clogged for hours. Every day life is consumed by traffic.'
             },
             {
@@ -24,19 +24,19 @@ export class Cutscene extends Scene
                 text: 'The city council joins forces with three regional transit agencies to form Seagull Metro.'
             },
             {
-                image: 'slide4',
+                image: 'traffic',
                 text: 'The transit agencies, having only worked on buses, are now tasked with a mass transit solution for the city.'
             },
             {
-                image: 'slide5',
+                image: 'traffic',
                 text: 'Advocates for a light rail network are successful in convincing the voters that trains are the future of metro.'
             },
             {
-                image: 'slide5',
+                image: 'busy train',
                 text: 'You are tasked with designing the train routes which Seagullites will use to get around.'
             },
             {
-                image: 'slide5',
+                image: 'busy train',
                 text: 'Thousands depend on your train to get around. '
             }
         ];
@@ -103,13 +103,15 @@ export class Cutscene extends Scene
             this.textDisplayed = true;
         }
         // When end of cutscene
-        else if (this.currentSlide >= this.slides.length) {
-            this.scene.start('Game'); 
-            return;
-        }
+        // bug: only registers after second click?? fixed
+
         else {
             // Move to next slide
             this.currentSlide++;
+            if (this.currentSlide >= this.slides.length) {
+                this.scene.start('Game'); 
+                return;
+            }
             this.slideImage.setTexture(this.slides[this.currentSlide].image);
             this.textDisplayed = false;
             this.displayText();
