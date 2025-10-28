@@ -30,6 +30,9 @@ Reaching goals:
 - Accessibility features (if needed, trains UI are usually accessible for a reason)
 - Add a webpage for background/sources
 - Implement feedback
+
+Current Bugs:
+- Opening cutscene does not work when spamming through the messages.
     
 
 
