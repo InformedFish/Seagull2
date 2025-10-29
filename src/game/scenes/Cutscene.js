@@ -9,7 +9,6 @@ export class Cutscene extends Scene
     init() {
         // Initialize variables for the cutscene
         this.currentSlide = 0;
-        this.textTimer = null;
         this.slides = [
             {
                 image: 'background',
@@ -73,51 +72,23 @@ export class Cutscene extends Scene
     displayText() {
         if (this.currentSlide >= this.slides.length) return;
         
-        const currentText = this.slides[this.currentSlide].text;
-        let currentChar = 0;
 
         // Clear any existing text
         this.slideText.setText('');
-        
-        // Type out the text 
-        const timer = this.time.addEvent({
-            delay: 10, // hi i control the speed
-            callback: () => {
-                this.slideText.text += currentText[currentChar];
-                currentChar++;
-                
-                if (currentChar === currentText.length) {
-                    this.textDisplayed = true;
-                    timer.destroy();
-                }
-            },
-            repeat: currentText.length - 1
-        });
+
+        this.slideText.text = this.slides[this.currentSlide].text
+
     }
 
     handleClick() {
-        // This case is for when the  text isn't fully rendered
-        // BUGGY... DOES NOT CLEAR PREVIOUS TEXT THINGY
-        if (!this.textDisplayed) {
-            this.slideText.setText(this.slides[this.currentSlide].text);
-            this.textDisplayed = true;
-        }
-        // When end of cutscene
-        // bug: only registers after second click?? fixed
 
-        else {
-            // Move to next slide
             this.currentSlide++;
             if (this.currentSlide >= this.slides.length) {
                 this.scene.start('Game'); 
                 return;
             }
             this.slideImage.setTexture(this.slides[this.currentSlide].image);
-            this.textDisplayed = false;
             this.displayText();
-        }
 
-
-        
     }
 }
