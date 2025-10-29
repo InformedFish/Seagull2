@@ -17,6 +17,18 @@ export class Game extends Scene
 
         this.mapWidth = 3000;
         this.mapHeight = 6000;
+
+        // communities
+        // Vultures are the businesses which seek to bring as much profit as possible. They want trains to ferry as many people to businesses as possible.
+        // Commuters are concerned with getting to work (industrial areas) and home as soon as possible. They prioritize access to work and home, and a speedy commute.
+        // Crows are the people that depend on trains to get to school, shops, and doctors. They want a large variety of stops.
+
+        // i will add a description later lol
+        this.communities = [
+            {name: "Businesses", agenda: "Promoting business, growing economies", support: 30, voters: 30, relationship: "Supportive", concern: "have no concerns"},
+            {name: "All-purpose riders", agenda: "Tending to our nests", support: 10, voters: 30, relationship: "Skeptical", concern: "lack access to residential areas."},
+            {name: "Commuters", agenda: "To work, and to rest", support: 35, voters: 60, relationship: "Neutral", concern: "are worried about safety."}
+        ];
         
     }
 
@@ -33,8 +45,9 @@ export class Game extends Scene
         // Set camera bounds to the map size fo now
         this.cameras.main.setBounds(0, 0, this.mapWidth, this.mapHeight);
 
-
-        let map = this.add.image(2000, 3000, 'map').setDisplaySize(1500, 3000);
+        this.mapContainer = this.add.container(0,0);
+        this.map = this.add.image(2000, 3000, 'map').setDisplaySize(1500, 3000);
+        this.mapContainer.add(this.map);
  
     
         // Create the sidebar for the game
@@ -48,30 +61,87 @@ export class Game extends Scene
         sidebar.setScrollFactor(0);
         sidebar.setDepth(1000);
 
+        this.budgetText = this.add.text(50, 100, "Remaining Budget: $" + this.budget, {
+            fontFamily: "Arial", color: "#000000", fontSize: 20
+        });
+        this.budgetText.setDepth(1001);
+        this.budgetText.setScrollFactor(0);
 
+        this.overallSupport = this.add.text(50, 120, "Overall Support: " + this.supporters + " out of " + this.voters, {
+            fontFamily: "Arial", color: "#000000", fontSize: 20
+        });
+        this.overallSupport.setDepth(1001);
+        this.overallSupport.setScrollFactor(0);
+
+        for (let i = 0; i < this.communities.length; i++) {
+            let currentCommunity = this.communities[i];
+            let comText = this.add.text(20, 200 + (i * 70), currentCommunity.name + " are " + currentCommunity.relationship + "\nThey " + currentCommunity.concern, {
+            fontFamily: "Arial", color: "#000000", fontSize: 20
+        });
+
+            comText.setDepth(1001);
+            comText.setScrollFactor(0);
+        };
+
+
+
+        // Add inital station
+        let firstStation = this.addStation(2300, 3200, "commerical", 1);
+        firstStation.setDepth(1000);
         
 
         // this.add.image(512, 384, 'background').setAlpha(0.5);
 
         // this.add.text(512, 300, "hi baka"); 
 
+        // demo button
+        let demoText = this.add.text(2200, 3100, 'Decision!!!', {
+            fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',
+            stroke: '#000000', strokeThickness: 8,
+            align: 'center'
+        });
+
+        demoText.setInteractive();
+        // playText.on('pointerdown', ()=> {console.log("ow")});
+        demoText.on('pointerdown', ()=> {this.scene.start('Cutscene');}) //I'm never able to understand arrow functions grrr
+        // demoText.setScrollFactor(0);
+        demoText.setDepth(1001);
+
 
     }
 
     updateSidebar() {
-
+            this.budgetText.setText("Remaining Budget: $" + this.budget);
+            this.overallSupport.setText("Overall Support: " + this.supporters + " out of " + this.voters);
         }
 
-    addStation(x, y) {
+    addStation(x, y, type, cost) {
+        // wont show up as red...
+        let station = this.add.circle(x, y, 20, '#ff0000ff');
+        this.mapContainer.add(station);
+        this.stations.push(station);
         
+        // Add station data
+        station.setData('type', type);
+        station.setData('buildCost', cost);
+        
+        station.setInteractive();
+        
+        return station;
+
     }
 
-    eventNotifier() {
+    eventNotifier(type = "popup", text, image = "dark logo") {
+        // Create a pop up for the decisions/notifications
+        if (type == "popup") {
 
-    }
+        }
+    }   
 
     eventManager() {
-        
+        // decide when an event occurs lol
+
+        // make a butotn
     }
 
     cameraControl() {

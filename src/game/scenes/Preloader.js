@@ -37,7 +37,9 @@ export class Preloader extends Scene
         this.load.image('busy train', 'BUSY TRAIN.png');
 
         this.load.image('traffic', 'traffic.png');
-        this.load.image('map', 'BASIC MAP.png')
+        this.load.image('map', 'BASIC MAP.png');
+
+        this.load.image("event1", "event1.png")
 
     }
 
