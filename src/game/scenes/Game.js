@@ -103,7 +103,7 @@ export class Game extends Scene
 
         demoText.setInteractive();
         // playText.on('pointerdown', ()=> {console.log("ow")});
-        demoText.on('pointerdown', ()=> {this.scene.start('Cutscene');}) //I'm never able to understand arrow functions grrr
+        demoText.on('pointerdown', ()=> {this.scene.start('GameOver');}) 
         // demoText.setScrollFactor(0);
         demoText.setDepth(1001);
 
